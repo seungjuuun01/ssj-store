@@ -33,8 +33,15 @@ jobs:
       - name: Restore signing keystore
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEYSTORE_PASS: ${{ secrets.KEYSTORE_PASS }}
         run: |
-          echo "$KEYSTORE_BASE64" | base64 -d > keystore.p12
+          # 공백/개행 제거 후 디코드 (붙여넣기 오염 방지)
+          printf '%s' "$KEYSTORE_BASE64" | tr -d ' \t\r\n' | base64 -d > keystore.p12
+          echo "decoded keystore size: $(wc -c < keystore.p12) bytes"
+          # 검증: 인증서를 실제로 꺼내본다. 실패하면 여기서 명확히 죽는다.
+          keytool -list -keystore keystore.p12 -storepass "$KEYSTORE_PASS" -alias hackminrepo \
+            && echo "OK: keystore/비번 유효" \
+            || { echo "ERROR: keystore 복원/비번 실패 — KEYSTORE_BASE64 또는 KEYSTORE_PASS 시크릿 확인"; exit 1; }
 
       - name: Inject keystore passwords into config
         env:
@@ -42,6 +49,7 @@ jobs:
           KEY_PASS: ${{ secrets.KEY_PASS }}
         run: |
           {
+            echo ""
             echo "keystorepass: \"$KEYSTORE_PASS\""
             echo "keypass: \"$KEY_PASS\""
           } >> config.yml

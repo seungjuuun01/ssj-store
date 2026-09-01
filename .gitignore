@@ -1,0 +1,14 @@
+# 절대 커밋 금지: 저장소 서명키와 비밀
+keystore.p12
+.secrets.local.txt
+*.keystore
+*.jks
+
+# fdroid 생성 산출물 (CI에서 생성 → Pages 배포하므로 커밋 불필요)
+/repo/index*
+/repo/entry*
+/repo/diff/
+/archive/
+/tmp/
+/public/
+config.py

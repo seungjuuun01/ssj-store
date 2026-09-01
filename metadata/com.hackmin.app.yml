@@ -1,0 +1,10 @@
+Categories:
+  - Internal
+License: LicenseRef-proprietary
+AuthorName: HackMin
+Name: HackMin Deliver
+Summary: HackMin 배달 앱
+Description: |-
+  HackMin 배달용 안드로이드 앱.
+
+  자체 배포 저장소를 통해 배포/업데이트됩니다.

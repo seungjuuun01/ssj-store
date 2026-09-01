@@ -3,6 +3,12 @@ Categories:
 License: LicenseRef-proprietary
 AuthorName: EZ
 Name: 개미 디펜스
-Summary: 개미 디펜스 타워디펜스 게임
+Summary: 몰려오는 벌레를 막는 타워디펜스
 Description: |-
   직접 만든 타워디펜스 게임 "개미 디펜스".
+
+  * 100개 스테이지
+  * 10종 타워
+  * 15종 몬스터
+
+  타워를 배치하고 업그레이드해서 몰려오는 벌레 떼를 막아내세요.

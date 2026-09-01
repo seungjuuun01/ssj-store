@@ -5,31 +5,139 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>HackMin Store</title>
 <style>
-  :root { color-scheme: light dark; }
-  body { font-family: system-ui, sans-serif; max-width: 640px; margin: 40px auto; padding: 0 20px; line-height: 1.6; }
-  code { background: rgba(128,128,128,.15); padding: 2px 6px; border-radius: 4px; }
-  .url { font-size: 1.1rem; font-weight: 600; word-break: break-all; }
-  a.btn { display:inline-block; margin-top:8px; padding:10px 16px; background:#3b7; color:#fff; border-radius:8px; text-decoration:none; }
+  :root{
+    --bg:#f4f5f7; --card:#ffffff; --ink:#1c1d22; --muted:#6b6f76;
+    --line:#e7e8ec; --brand:#ff6b5e; --brand2:#37b878; --chip:#eef0f3;
+    --shadow:0 6px 20px rgba(20,20,30,.08);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{ --bg:#111318; --card:#1a1d24; --ink:#eef0f4; --muted:#9aa0a8;
+      --line:#262a32; --chip:#22262e; --shadow:0 8px 26px rgba(0,0,0,.4); }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+    line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px 64px}
+  header{background:linear-gradient(135deg,var(--brand),var(--brand2));
+    color:#fff;padding:44px 20px 40px;text-align:center}
+  header .logo{font-size:2.5rem;font-weight:800;margin:0;letter-spacing:-1px}
+  header p{margin:8px 0 0;opacity:.95;font-size:1.05rem}
+  .repo{max-width:960px;margin:-24px auto 0;padding:0 20px}
+  .repo-box{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    box-shadow:var(--shadow);padding:18px 20px;display:flex;flex-wrap:wrap;
+    align-items:center;gap:12px;justify-content:space-between}
+  .repo-box .label{font-size:.8rem;color:var(--muted);margin-bottom:2px}
+  .repo-box code{font-size:1rem;font-weight:600;word-break:break-all}
+  .btns{display:flex;gap:8px;flex-wrap:wrap}
+  .btn{border:0;border-radius:10px;padding:10px 16px;font-size:.92rem;font-weight:600;
+    cursor:pointer;text-decoration:none;display:inline-block}
+  .btn.primary{background:var(--brand);color:#fff}
+  .btn.ghost{background:var(--chip);color:var(--ink)}
+  h2{font-size:1.15rem;margin:40px 0 4px}
+  .sub{color:var(--muted);font-size:.92rem;margin:0 0 18px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+  .shot{background:#000;aspect-ratio:9/16;overflow:hidden;display:flex;align-items:flex-start;justify-content:center}
+  .shot img{width:100%;height:100%;object-fit:cover;object-position:top}
+  .card .body{padding:14px 16px 16px}
+  .card .name{font-weight:700;font-size:1.05rem;margin:0}
+  .card .desc{color:var(--muted);font-size:.88rem;margin:4px 0 0}
+  .chip{display:inline-block;background:var(--chip);color:var(--muted);
+    font-size:.72rem;font-weight:600;padding:3px 9px;border-radius:999px;margin-top:10px}
+  ol.steps{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    box-shadow:var(--shadow);padding:20px 20px 20px 44px;margin:0}
+  ol.steps li{margin:6px 0}
+  footer{color:var(--muted);font-size:.82rem;text-align:center;margin-top:36px}
+  .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);
+    background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:10px;
+    opacity:0;transition:.25s;font-size:.9rem;pointer-events:none}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
-  <h1>📦 HackMin Store</h1>
-  <p>HackMin 앱을 설치·업데이트하는 자체 F-Droid 저장소입니다.</p>
+  <header>
+    <h1 class="logo">📦 HackMin Store</h1>
+    <p>내가 만든 앱을 설치하고 자동으로 업데이트 받는 곳</p>
+  </header>
 
-  <h2>설치 방법</h2>
-  <ol>
-    <li><a class="btn" href="https://f-droid.org/F-Droid.apk">F-Droid 클라이언트 설치</a></li>
-    <li>F-Droid → 설정 → 저장소 → <b>+</b> 버튼 → 아래 주소 추가</li>
-  </ol>
-  <p class="url">https://seungjuuun01.github.io/hackmin-store/repo</p>
+  <div class="repo">
+    <div class="repo-box">
+      <div>
+        <div class="label">F-Droid에 추가할 저장소 주소</div>
+        <code id="repoUrl">https://seungjuuun01.github.io/hackmin-store/repo</code>
+      </div>
+      <div class="btns">
+        <button class="btn ghost" onclick="copyRepo()">주소 복사</button>
+        <a class="btn primary" href="https://f-droid.org/F-Droid.apk">F-Droid 설치</a>
+      </div>
+    </div>
+  </div>
 
-  <p>추가 후 "최신 정보 업데이트"를 누르면 HackMin Deliver / Rider 앱이 목록에 나타납니다.
-     앱은 새 버전이 올라올 때마다 F-Droid가 자동으로 업데이트 알림을 표시합니다.</p>
+  <div class="wrap">
+    <h2>수록 앱</h2>
+    <p class="sub">앱을 설치하려면 F-Droid에서 위 저장소를 추가하세요.</p>
+    <div class="grid">
 
-  <h2>수록 앱</h2>
-  <ul>
-    <li>HackMin Deliver (com.hackmin.app)</li>
-    <li>HackMin Rider (com.hackmin.connect)</li>
-  </ul>
+      <div class="card">
+        <div class="shot"><img src="shots/antdef.png" alt="개미 디펜스 스크린샷" loading="lazy"></div>
+        <div class="body">
+          <p class="name">개미 디펜스</p>
+          <p class="desc">100 스테이지 · 10종 타워 · 15종 몬스터 타워디펜스</p>
+          <span class="chip">게임</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="shot"><img src="shots/omok.png" alt="오목 스크린샷" loading="lazy"></div>
+        <div class="body">
+          <p class="name">오목</p>
+          <p class="desc">렌주룰 · AI 난이도 · 전적 기록 · 미니게임</p>
+          <span class="chip">게임</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="shot"><img src="shots/deliver.png" alt="해킹의 민족 스크린샷" loading="lazy"></div>
+        <div class="body">
+          <p class="name">해킹의 민족</p>
+          <p class="desc">당신의 일상을 안전하게 배달합니다</p>
+          <span class="chip">배달</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="shot"><img src="shots/rider.png" alt="해킹커넥트 스크린샷" loading="lazy"></div>
+        <div class="body">
+          <p class="name">해킹커넥트</p>
+          <p class="desc">원하는 시간에, 원하는 만큼 — 라이더 앱</p>
+          <span class="chip">라이더</span>
+        </div>
+      </div>
+
+    </div>
+
+    <h2>설치 방법</h2>
+    <p class="sub">한 번만 저장소를 추가하면, 이후 업데이트는 F-Droid가 자동으로 알려줍니다.</p>
+    <ol class="steps">
+      <li>위의 <b>F-Droid 설치</b> 버튼으로 F-Droid 클라이언트를 설치</li>
+      <li>F-Droid → 설정 → 저장소 → <b>+</b> → 위 주소 붙여넣기 (주소 복사 버튼 이용)</li>
+      <li>"최신 정보 업데이트" → 목록에서 원하는 앱 설치</li>
+    </ol>
+
+    <footer>HackMin Store · 개인 배포용 F-Droid 저장소</footer>
+  </div>
+
+  <div class="toast" id="toast">주소를 복사했어요</div>
+<script>
+  function copyRepo(){
+    var t=document.getElementById('repoUrl').textContent.trim();
+    navigator.clipboard.writeText(t).then(function(){
+      var el=document.getElementById('toast');el.classList.add('show');
+      setTimeout(function(){el.classList.remove('show')},1600);
+    });
+  }
+</script>
 </body>
 </html>

@@ -3,6 +3,12 @@ Categories:
 License: LicenseRef-proprietary
 AuthorName: EZ
 Name: 오목
-Summary: 오목(렌주) 게임
+Summary: 렌주룰 기반 오목 게임
 Description: |-
   직접 만든 오목 게임.
+
+  * 렌주룰 지원
+  * 난이도 선택 (AI 대국)
+  * 전적 기록 · 상점 · 미니게임
+
+  흑·백을 골라 다섯 목을 먼저 완성하세요.

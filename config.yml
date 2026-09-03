@@ -2,14 +2,14 @@
 # 비밀번호(keystorepass/keypass)는 CI에서 GitHub Secrets 로부터 런타임에 append 됩니다.
 # 절대 이 파일에 비밀번호를 직접 적지 마세요.
 
-repo_url: "https://seungjuuun01.github.io/hackmin-store/repo"
-repo_name: "HackMin Store"
+repo_url: "https://seungjuuun01.github.io/ssj-store/repo"
+repo_name: "SSJ Store"
 repo_description: >-
   HackMin 자체 배포 저장소. deliver(배달)·rider(라이더) 앱을 배포/업데이트합니다.
 
 archive_older: 3
-archive_url: "https://seungjuuun01.github.io/hackmin-store/archive"
-archive_name: "HackMin Store Archive"
+archive_url: "https://seungjuuun01.github.io/ssj-store/archive"
+archive_name: "SSJ Store Archive"
 archive_description: >-
   이전 버전 보관소.
 

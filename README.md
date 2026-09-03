@@ -1,4 +1,4 @@
-# HackMin Store (자체 F-Droid 저장소)
+# SSJ Store (자체 F-Droid 저장소)
 
 내가 만든 안드로이드 앱을 배포/업데이트하는 개인 앱스토어입니다.
 `repo/`에 서명된 APK를 넣고 push 하면, GitHub Actions가 F-Droid 인덱스를 만들어
@@ -7,13 +7,13 @@ GitHub Pages로 배포합니다. 사용자는 F-Droid 클라이언트에 저장�
 
 ## 최초 1회 설정
 
-1. **GitHub 저장소 생성**: `seungjuuun01/hackmin-store` (public) 로 빈 저장소를 만든다.
+1. **GitHub 저장소 생성**: `seungjuuun01/ssj-store` (public) 로 빈 저장소를 만든다.
 2. **push**:
    ```bash
-   cd /c/dev/hackmin-store
+   cd /c/dev/ssj-store
    git add -A && git commit -m "init: hackmin fdroid store"
    git branch -M main
-   git remote add origin https://github.com/seungjuuun01/hackmin-store.git
+   git remote add origin https://github.com/seungjuuun01/ssj-store.git
    git push -u origin main
    ```
 3. **Secrets 등록** (Settings → Secrets and variables → Actions → New repository secret):
@@ -23,7 +23,7 @@ GitHub Pages로 배포합니다. 사용자는 F-Droid 클라이언트에 저장�
    - `KEY_PASS`
 4. **Pages 활성화**: Settings → Pages → Source = **GitHub Actions**.
 5. Actions 탭에서 워크플로우가 성공하면 완료.
-   저장소 주소: `https://seungjuuun01.github.io/hackmin-store/repo`
+   저장소 주소: `https://seungjuuun01.github.io/ssj-store/repo`
 
 > ⚠️ `keystore.p12` 와 `.secrets.local.txt` 는 절대 커밋하지 말 것(.gitignore 처리됨).
 > 이 키를 잃어버리면 기존 사용자에게 업데이트를 내보낼 수 없습니다. 안전하게 백업하세요.
@@ -40,6 +40,6 @@ GitHub Pages로 배포합니다. 사용자는 F-Droid 클라이언트에 저장�
 
 F-Droid 설치 후 저장소 주소 추가:
 ```
-https://seungjuuun01.github.io/hackmin-store/repo
+https://seungjuuun01.github.io/ssj-store/repo
 ```
-(랜딩 페이지: `https://seungjuuun01.github.io/hackmin-store/`)
+(랜딩 페이지: `https://seungjuuun01.github.io/ssj-store/`)
